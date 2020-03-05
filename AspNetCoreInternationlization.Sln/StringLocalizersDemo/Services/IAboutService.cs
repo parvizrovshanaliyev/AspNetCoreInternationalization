@@ -10,9 +10,9 @@ namespace StringLocalizersDemo.Services
 
     public class AboutService : IAboutService
     {
-        IStringLocalizer _localizer;
+        private readonly IStringLocalizer<IAboutService> _localizer;
 
-        public AboutService(IStringLocalizer<AboutService> localizer)
+        public AboutService(IStringLocalizer<IAboutService> localizer)
         {
             _localizer = localizer;
         }
