@@ -13,7 +13,7 @@ namespace StringLocalizersDemo.Services
 
     public class DepartmentService : IDepartmentService
     {
-        private readonly IStringLocalizer<DepartmentService> _localizer;
+        IStringLocalizer _localizer;
 
         public DepartmentService(IStringLocalizer<DepartmentService> localizer)
         {
@@ -23,6 +23,7 @@ namespace StringLocalizersDemo.Services
         public string GetInfo(string name)
         {
             LocalizedString value = _localizer[name];
+
             if (value.ResourceNotFound)
             {
                 return _localizer["help"];
