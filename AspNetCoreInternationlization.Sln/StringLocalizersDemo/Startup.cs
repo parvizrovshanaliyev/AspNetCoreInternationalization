@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,11 +21,10 @@ namespace StringLocalizersDemo
 
             services.AddScoped<IAboutService, AboutService>();
 
-            services.AddLocalization(options =>
-            {
-                options.ResourcesPath = "Resources";
-            });
-
+            //lokalizasiya servisini qoşuruq.
+            // lokalizasiya üçün tərcümə fayllarının Resources qovluğunda
+            //yerləşdiyini göstəririk
+            services.AddLocalization(x => x.ResourcesPath = "Resources");
             #endregion
         }
 
