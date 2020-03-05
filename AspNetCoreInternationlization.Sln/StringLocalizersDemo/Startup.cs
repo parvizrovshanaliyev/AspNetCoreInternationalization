@@ -46,6 +46,7 @@ namespace StringLocalizersDemo
             {
                 endpoints.MapGet("/", async context =>
                 {
+                    // about
                     if (context.Request.Query.ContainsKey("about"))
                     {
                         string searchTerm =
@@ -57,6 +58,7 @@ namespace StringLocalizersDemo
                         await context.Response.WriteAsync(content);
                         return;
                     }
+                    // department
                     if (context.Request.Query.ContainsKey("department"))
                     {
                         string department =
