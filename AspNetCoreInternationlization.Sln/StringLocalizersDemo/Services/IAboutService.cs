@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.Localization;
+﻿using Microsoft.Extensions.Localization;
 
 namespace StringLocalizersDemo.Services
 {
@@ -10,12 +9,13 @@ namespace StringLocalizersDemo.Services
 
     public class AboutService : IAboutService
     {
-        private readonly IStringLocalizer<IAboutService> _localizer;
+        private readonly IStringLocalizer<AboutService> _localizer;
 
-        public AboutService(IStringLocalizer<IAboutService> localizer)
+        public AboutService(IStringLocalizer<AboutService> localizer)
         {
             _localizer = localizer;
         }
+
         public string Reply(string searchTerm)
         {
             LocalizedString resource = _localizer[searchTerm];
@@ -24,6 +24,7 @@ namespace StringLocalizersDemo.Services
             {
                 return _localizer["help"];
             }
+
             return resource;
         }
     }
