@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StringLocalizersDemo.Services;
 
 namespace StringLocalizersDemo
 {
@@ -16,6 +17,16 @@ namespace StringLocalizersDemo
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            #region Services
+
+            services.AddScoped<IAboutService, AboutService>();
+
+            services.AddLocalization(options =>
+            {
+                options.ResourcesPath = "Resources";
+            });
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,10 +39,37 @@ namespace StringLocalizersDemo
 
             app.UseRouting();
 
+            // app.Run(async (context)  =>
+            // {
+            //     
+            //     if (context.Request.Query.ContainsKey("about"))
+            //     {
+            //         string searchTerm =
+            //             context.Request.Query["about"];
+            //         IAboutService service =
+            //             context.RequestServices.GetService<IAboutService>();
+            //
+            //         string content = service.Reply(searchTerm);
+            //         await context.Response.WriteAsync(content);
+            //         return;
+            //     }
+            //     await context.Response.WriteAsync("Hello World!");
+            // });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
                 {
+                    if (context.Request.Query.ContainsKey("about"))
+                    {
+                        string searchTerm =
+                            context.Request.Query["about"];
+                        IAboutService service =
+                            context.RequestServices.GetService<IAboutService>();
+
+                        string content = service.Reply(searchTerm);
+                        await context.Response.WriteAsync(content);
+                        return;
+                    }
                     await context.Response.WriteAsync("Hello World!");
                 });
             });
