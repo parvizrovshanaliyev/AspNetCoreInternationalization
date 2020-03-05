@@ -18,6 +18,7 @@ namespace StringLocalizersDemo
 
             services.AddScoped<IAboutService, AboutService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IHelperService, HelperService>();
 
             //lokalizasiya servisini qoşuruq.
             // lokalizasiya üçün tərcümə fayllarının Resources qovluğunda
@@ -67,6 +68,18 @@ namespace StringLocalizersDemo
                             context.RequestServices.GetService<IDepartmentService>();
 
                         string content = service.GetInfo(department);
+                        await context.Response.WriteAsync(content);
+                        return;
+                    }
+                    // help
+                    if (context.Request.Query.ContainsKey("help"))
+                    {
+                        string serviceName =
+                            context.Request.Query["help"];
+                        IHelperService service =
+                            context.RequestServices.GetService<IHelperService>();
+
+                        string content = service.GetHelpFor(serviceName);
                         await context.Response.WriteAsync(content);
                         return;
                     }
