@@ -59,6 +59,7 @@ namespace StringLocalizersDemo
                         await context.Response.WriteAsync(content);
                         return;
                     }
+
                     // department
                     if (context.Request.Query.ContainsKey("department"))
                     {
@@ -71,6 +72,7 @@ namespace StringLocalizersDemo
                         await context.Response.WriteAsync(content);
                         return;
                     }
+
                     // help
                     if (context.Request.Query.ContainsKey("help"))
                     {
