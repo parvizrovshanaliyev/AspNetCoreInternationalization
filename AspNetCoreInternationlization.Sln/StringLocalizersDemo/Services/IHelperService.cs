@@ -14,7 +14,7 @@ namespace StringLocalizersDemo.Services
 
     public class HelperService : IHelperService
     {
-        private readonly IStringLocalizerFactory _factory;
+        private IStringLocalizerFactory _factory;
         public HelperService(IStringLocalizerFactory factory)
         {
             _factory = factory;
@@ -24,10 +24,13 @@ namespace StringLocalizersDemo.Services
         {
             string serviceClassName =
                 $"{serviceName}Service";
-            Type serviceType = Assembly.GetEntryAssembly()
-                ?.ExportedTypes
-                .FirstOrDefault(x => x.Name.Equals(serviceClassName,
-                    StringComparison.CurrentCultureIgnoreCase));
+            Type serviceType = Assembly
+                .GetEntryAssembly()
+                .ExportedTypes
+                .Where(x => x.Name.Equals(serviceClassName,
+                    StringComparison.CurrentCultureIgnoreCase))
+                .FirstOrDefault();
+
             if (serviceType == null)
             {
                 return $"Help is not available for {serviceName}.";
@@ -39,10 +42,14 @@ namespace StringLocalizersDemo.Services
             IEnumerable<LocalizedString> resources =
                 localizer.GetAllStrings();
 
+
+
             IEnumerable<string> keys =
                 resources.Select(x => x.Name);
 
+            
             return $"Available keys {string.Join(",", keys)}";
+            // return "resources not found.";
         }
     }
 }
