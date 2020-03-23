@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultithreadingDemo", "Multi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnumerationsDemo", "EnumarationsDemo\EnumerationsDemo.csproj", "{7E4A378F-CBFC-4DB1-A7A8-8CAE9F7E5C56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReaderWriterDemo", "ReaderWriterDemo\ReaderWriterDemo.csproj", "{71F08958-277D-4990-9CD5-CB5935716908}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReaderWriterDemo", "ReaderWriterDemo\ReaderWriterDemo.csproj", "{71F08958-277D-4990-9CD5-CB5935716908}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringLocalizersDemo", "StringLocalizersDemo\StringLocalizersDemo.csproj", "{417205F4-75C3-4CDB-BE33-7901FBAB1FB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StringLocalizersDemo", "StringLocalizersDemo\StringLocalizersDemo.csproj", "{417205F4-75C3-4CDB-BE33-7901FBAB1FB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestLocalizationDemo", "RequestLocalizationDemo\RequestLocalizationDemo.csproj", "{175D4E46-6F43-48E6-AE07-88E22AA36E41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{417205F4-75C3-4CDB-BE33-7901FBAB1FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{417205F4-75C3-4CDB-BE33-7901FBAB1FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{417205F4-75C3-4CDB-BE33-7901FBAB1FB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{175D4E46-6F43-48E6-AE07-88E22AA36E41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{175D4E46-6F43-48E6-AE07-88E22AA36E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{175D4E46-6F43-48E6-AE07-88E22AA36E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{175D4E46-6F43-48E6-AE07-88E22AA36E41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
