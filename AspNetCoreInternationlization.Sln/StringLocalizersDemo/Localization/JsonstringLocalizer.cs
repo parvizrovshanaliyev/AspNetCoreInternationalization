@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -8,7 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace StringLocalizersDemo.Localization
 {
-    public class JsonstringLocalizer : IStringLocalizer
+    public class JsonStringLocalizer : IStringLocalizer
     {
         #region fields
 
@@ -20,8 +19,9 @@ namespace StringLocalizersDemo.Localization
         #endregion
 
         #region ctor
-
-        public JsonstringLocalizer(string resourcesRelativePath, string typeRelativeNamespace,
+         
+        public JsonStringLocalizer(string resourcesRelativePath,
+            string typeRelativeNamespace,
             CultureInfo uiCultureInfo)
         {
             _resourcesRelativePath = resourcesRelativePath;
@@ -31,23 +31,26 @@ namespace StringLocalizersDemo.Localization
 
         #endregion
 
-
-
-        public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
+        JObject GetResource()
         {
-            JObject resources = GetResource();
-            foreach (var pair in resources)
+            if (_resourcesCache == null)
             {
-                yield return new LocalizedString(pair.Key,
-                    pair.Value.Value<string>());
-            }
-        }
+                string tag = _uiCultureInfo.Name;
 
-        public IStringLocalizer WithCulture(CultureInfo culture)
-        {
-            return new JsonstringLocalizer(_resourcesRelativePath,
-                _typeRelativeNamespace,
-                culture);
+                string typeRelative =
+                    _typeRelativeNamespace.Replace(".", "/");
+
+                string filePath =
+                    $"{_resourcesRelativePath}{typeRelative}/{tag}.json";
+
+                string json = File.Exists(filePath) ?
+                    File.ReadAllText(filePath, Encoding.UTF8) :
+                    "{}";
+                _resourcesCache = JObject.Parse(json);
+            }
+
+            return _resourcesCache;
+
         }
 
         public LocalizedString this[string name] => this[name, null];
@@ -82,27 +85,26 @@ namespace StringLocalizersDemo.Localization
             }
         }
 
-        JObject GetResource()
+        public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
         {
-            if (_resourcesCache == null)
+            JObject resources = GetResource();
+            foreach (var pair in resources)
             {
-                string tag = _uiCultureInfo.Name;
-
-                string typeRelative =
-                    _typeRelativeNamespace.Replace(".", "/");
-
-                string filePath =
-                    $"{_resourcesRelativePath}{typeRelative}/{tag}.json";
-
-                string json = File.Exists(filePath) ?
-                    File.ReadAllText(filePath, Encoding.Unicode) :
-                    "{}";
-                _resourcesCache = JObject.Parse(json);
+                yield return new LocalizedString(pair.Key,
+                    pair.Value.Value<string>());
             }
-
-            return _resourcesCache;
-
         }
+
+        public IStringLocalizer WithCulture(CultureInfo culture)
+        {
+            return new JsonStringLocalizer(_resourcesRelativePath,
+                _typeRelativeNamespace,
+                culture);
+        }
+
+       
+
+        
 
     }
 }

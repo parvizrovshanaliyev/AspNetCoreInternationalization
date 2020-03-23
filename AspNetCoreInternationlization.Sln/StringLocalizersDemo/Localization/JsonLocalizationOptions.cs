@@ -7,6 +7,6 @@ namespace StringLocalizersDemo.Localization
 {
     public class JsonLocalizationOptions
     {
-        public string ResourcesPath { get; set; } = string.Empty;
+        public string ResourcesPath {  get; set; } = string.Empty;
     }
 }

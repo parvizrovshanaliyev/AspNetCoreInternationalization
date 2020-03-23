@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Localization;
+using StringLocalizersDemo.Localization;
 using StringLocalizersDemo.Services;
 
 namespace StringLocalizersDemo
@@ -20,11 +22,20 @@ namespace StringLocalizersDemo
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IHelperService, HelperService>();
 
-            //lokalizasiya servisini qoşuruq.
+            // lokalizasiya servisini qoşuruq.
             // lokalizasiya üçün tərcümə fayllarının Resources qovluğunda
-            //yerləşdiyini göstəririk
-            services.AddLocalization(x => x.ResourcesPath = "Resources");
-
+            // yerləşdiyini göstəririk
+            // xml resources
+            //services.AddLocalization(x => x.ResourcesPath = "Resources");
+            //
+            // json resources
+            services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
+            services.AddTransient(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
+            services.Configure<JsonLocalizationOptions>(options =>
+            {
+                options.ResourcesPath = "JsonResources"; 
+            });
+            //
             services.AddMvc()
                 .AddViewLocalization(
                     LanguageViewLocationExpanderFormat.Suffix,
