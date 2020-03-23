@@ -11,34 +11,47 @@ namespace StringLocalizersDemo.Localization
     public class JsonstringLocalizer : IStringLocalizer
     {
         #region fields
+
         private string _resourcesRelativePath;
         private string _typeRelativeNamespace;
         private CultureInfo _uiCultureInfo;
         private JObject _resourcesCache;
+
         #endregion
 
         #region ctor
-        public JsonstringLocalizer(string resourcesRelativePath, string typeRelativeNamespace, CultureInfo uiCultureInfo)
+
+        public JsonstringLocalizer(string resourcesRelativePath, string typeRelativeNamespace,
+            CultureInfo uiCultureInfo)
         {
             _resourcesRelativePath = resourcesRelativePath;
             _typeRelativeNamespace = typeRelativeNamespace;
             _uiCultureInfo = uiCultureInfo;
         }
+
         #endregion
 
 
 
         public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
         {
-            throw new NotImplementedException();
+            JObject resources = GetResource();
+            foreach (var pair in resources)
+            {
+                yield return new LocalizedString(pair.Key,
+                    pair.Value.Value<string>());
+            }
         }
 
         public IStringLocalizer WithCulture(CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return new JsonstringLocalizer(_resourcesRelativePath,
+                _typeRelativeNamespace,
+                culture);
         }
 
-        public LocalizedString this[string name] => throw new NotImplementedException();
+        public LocalizedString this[string name] => this[name, null];
+
 
         public LocalizedString this[string name, params object[] arguments]
         {
@@ -62,6 +75,10 @@ namespace StringLocalizersDemo.Localization
                         value = string.Format(value, arguments);
                     }
                 }
+
+                return new LocalizedString(name,
+                    value,
+                    resourcesNotFound);
             }
         }
 

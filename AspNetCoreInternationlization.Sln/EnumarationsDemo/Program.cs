@@ -8,6 +8,7 @@ namespace EnumerationsDemo
         static void Main(string[] args)
         {
             Console.WriteLine(Gender.Unspecified.ToString());
+            Console.WriteLine(StatusE.Pending.ToString());
 
             CultureInfo.CurrentUICulture=
                 new CultureInfo("de-DE");

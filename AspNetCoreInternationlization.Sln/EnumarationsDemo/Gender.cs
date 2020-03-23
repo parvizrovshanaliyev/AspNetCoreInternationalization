@@ -12,4 +12,12 @@ namespace EnumerationsDemo
         Female,
         Unspecified
     }
+
+
+    public enum StatusE
+    {
+        Pending = 1,
+        Approve = 2,
+        Reject = 3
+    }
 }
