@@ -30,7 +30,7 @@ namespace RequestLocalizationDemo
             // localization
             services.AddLocalization(options =>
             {
-                options.ResourcesPath="Resources";
+                options.ResourcesPath = "Resources";
             });
             //
             services.Configure<RequestLocalizationOptions>(options =>
@@ -43,7 +43,7 @@ namespace RequestLocalizationDemo
                     new CultureInfo("fr-FR"),
                     new CultureInfo("en-GB")
                 };
-
+                options.FallBackToParentUICultures = false;
                 // default culture
                 options.DefaultRequestCulture = new RequestCulture("es");
             });
@@ -57,8 +57,8 @@ namespace RequestLocalizationDemo
                 //options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
 
             });
-                
-            
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
