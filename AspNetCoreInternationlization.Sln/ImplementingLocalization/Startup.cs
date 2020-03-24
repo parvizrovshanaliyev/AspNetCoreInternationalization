@@ -3,9 +3,11 @@ using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Localization;
 
 namespace ImplementingLocalization
 {
@@ -21,7 +23,13 @@ namespace ImplementingLocalization
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
+            
+            services.Configure<LocalizationOptions>(options =>
+            {
+                options.ResourcesPath="Resources";
+            });
 
             services.Configure<RequestLocalizationOptions>(options =>
             {
@@ -51,7 +59,9 @@ namespace ImplementingLocalization
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            //
+            app.UseRequestLocalization();
+            //
             app.UseRouting();
 
             app.UseAuthorization();

@@ -24,7 +24,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+
                     </ul>
+                    <!-- #region culture select list -->
+                    <partial name="_CulturePartial" />
+                    <!-- #endregion -->
                 </div>
             </div>
         </nav>
@@ -43,6 +47,14 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script asp-append-version="true">
+        (function() {
+            $("#cultureForm select").on("change",
+                function() {
+                    $(this).parent().submit();
+                });
+        }());
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
