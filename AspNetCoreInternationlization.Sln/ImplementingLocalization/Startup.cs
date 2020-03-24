@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
+using ImplementingLocalization.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
@@ -25,11 +26,17 @@ namespace ImplementingLocalization
         {
             services.AddControllersWithViews()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization();
-            
+                .AddDataAnnotationsLocalization(options =>
+                    {
+                        options.DataAnnotationLocalizerProvider = (type, factory) =>
+                            {
+                                return factory.Create(typeof(ErrorMessages));
+                            };
+                    });
+
             services.Configure<LocalizationOptions>(options =>
             {
-                options.ResourcesPath="Resources";
+                options.ResourcesPath = "Resources";
             });
 
             services.Configure<RequestLocalizationOptions>(options =>
