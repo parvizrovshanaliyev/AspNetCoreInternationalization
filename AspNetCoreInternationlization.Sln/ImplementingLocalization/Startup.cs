@@ -24,7 +24,8 @@ namespace ImplementingLocalization
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews()
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
             
             services.Configure<LocalizationOptions>(options =>
             {
