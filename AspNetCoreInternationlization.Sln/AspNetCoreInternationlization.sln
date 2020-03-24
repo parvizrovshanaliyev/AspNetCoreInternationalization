@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReaderWriterDemo", "ReaderW
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StringLocalizersDemo", "StringLocalizersDemo\StringLocalizersDemo.csproj", "{417205F4-75C3-4CDB-BE33-7901FBAB1FB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestLocalizationDemo", "RequestLocalizationDemo\RequestLocalizationDemo.csproj", "{175D4E46-6F43-48E6-AE07-88E22AA36E41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RequestLocalizationDemo", "RequestLocalizationDemo\RequestLocalizationDemo.csproj", "{175D4E46-6F43-48E6-AE07-88E22AA36E41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImplementingLocalization", "ImplementingLocalization\ImplementingLocalization.csproj", "{278BFDB2-674A-4264-AC31-5BC3C4D20477}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{175D4E46-6F43-48E6-AE07-88E22AA36E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{175D4E46-6F43-48E6-AE07-88E22AA36E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{175D4E46-6F43-48E6-AE07-88E22AA36E41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{278BFDB2-674A-4264-AC31-5BC3C4D20477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{278BFDB2-674A-4264-AC31-5BC3C4D20477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{278BFDB2-674A-4264-AC31-5BC3C4D20477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{278BFDB2-674A-4264-AC31-5BC3C4D20477}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
