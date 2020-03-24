@@ -45,7 +45,7 @@ namespace RequestLocalizationDemo
                 };
                 options.FallBackToParentUICultures = false;
                 // default culture
-                options.DefaultRequestCulture = new RequestCulture("es");
+                options.DefaultRequestCulture = new RequestCulture("en-GB");
             });
             //
             services.AddMvc(options =>
