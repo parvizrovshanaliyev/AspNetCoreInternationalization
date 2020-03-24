@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,6 +22,18 @@ namespace ImplementingLocalization
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.SupportedUICultures = new List<CultureInfo>
+                {
+                    new CultureInfo("en-US"),
+                    new CultureInfo("ru-RU"),
+                    new CultureInfo("es-MX")
+                };
+                // default culture
+                options.DefaultRequestCulture = new RequestCulture("en-US");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
