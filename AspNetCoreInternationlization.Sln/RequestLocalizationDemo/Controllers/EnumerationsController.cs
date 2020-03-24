@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using RequestLocalizationDemo.Enumerations;
+using RequestLocalizationDemo.Localization;
 using RequestLocalizationDemo.Models;
 
 namespace RequestLocalizationDemo.Controllers
 {
+    [MiddlewareFilter(typeof(LocalizationPipeline))]
     public class EnumerationsController : Controller
     {
         private IStringLocalizer<Gender> _genderLocalizer;
@@ -21,9 +21,7 @@ namespace RequestLocalizationDemo.Controllers
 
         public IActionResult Genders()
         {
-            Console.WriteLine("+++++++++++=====+++++++++++");
-            Console.WriteLine($"Current Culture : {CultureInfo.CurrentCulture}");
-            Console.WriteLine($"Current UI Culture : {CultureInfo.CurrentUICulture}");
+           
             List<SelectItem> selectList =
                 new List<SelectItem>();
             Array values = Enum.GetValues(typeof(Gender));
@@ -39,7 +37,16 @@ namespace RequestLocalizationDemo.Controllers
                     Value = (int)value
                 });
             }
+            IRequestCultureFeature feature =
+                HttpContext.Features.Get<IRequestCultureFeature>();
+            Console.WriteLine("+++++++++++=====+++++++++++");
+            Console.WriteLine($"Current Culture : {feature.RequestCulture.Culture}");
+            Console.WriteLine($"Current UI Culture : {feature.RequestCulture.UICulture}");
+            Console.WriteLine($"Provider : {feature.Provider}");
 
+            //Console.WriteLine("+++++++++++=====+++++++++++");
+            //Console.WriteLine($"Current Culture : {CultureInfo.CurrentCulture}");
+            //Console.WriteLine($"Current UI Culture : {CultureInfo.CurrentUICulture}");
             return Ok(selectList);
         }
     }
