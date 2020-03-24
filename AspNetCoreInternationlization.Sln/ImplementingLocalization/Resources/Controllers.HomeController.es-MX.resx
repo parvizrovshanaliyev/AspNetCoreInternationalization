@@ -126,4 +126,8 @@
   <data name="Welcome" xml:space="preserve">
     <value>Bienvenida</value>
   </data>
+  <data name="Thank you" xml:space="preserve">
+    <value>Gracias por tu mensaje &amp;lt;strong&amp;gt; {0} &amp;lt;/strong&amp;gt;, nos pondremos en contacto contigo pronto.</value>
+    <comment>Thank you</comment>
+  </data>
 </root>

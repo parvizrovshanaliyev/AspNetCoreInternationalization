@@ -22,7 +22,19 @@ namespace ImplementingLocalization.Controllers
         {
             return View();
         }
-
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Contact(ContactModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            return View("ContactConfirmed", model.Comment);
+        }
         public IActionResult Privacy()
         {
             return View();

@@ -1,0 +1,39 @@
+﻿@model ContactModel
+
+<div class="row">
+    <div class="col-xs-1">
+        <img src="/images/us_flag.png" class="img-responsive" />
+    </div>
+    <div class="col-xs-11">
+        <address>
+            <div>Our office in US</div>
+            <div>Road of Captain America 24</div>
+            <abbr title="Phone">Phone:</abbr>
+            +1 000 000 000
+        </address>
+    </div>
+</div>
+<div>
+    <strong>Support:</strong>&nbsp;<a href="mailto:support@nonexistingapocompany.com">support@nonexistingapocompany.com</a>
+</div>
+<div>
+    <strong>Marketing:</strong>&nbsp;<a href="mailto:marketing@nonexistingapocompany.com">marketing@nonexistingapocompany.com</a>
+</div>
+
+<br />
+
+<form asp-controller="Home" asp-action="Contact" method="post">
+    <div class="form-group">
+        <label class="control-label" for="Name">Name</label>
+        <input asp-for="Name" class="form-control" name="Name" type="text" placeholder="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="Comment">Comment</label>
+        <textarea asp-for="Comment" class="form-control" name="Comment" placeholder="Comment"></textarea>
+        <span asp-validation-for="Comment"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary col-xs-12" value="Submit" />
+    </div>
+</form>
