@@ -4,6 +4,7 @@ using ImplementingLocalization.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,7 @@ namespace ImplementingLocalization
         {
             services.AddControllersWithViews()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                // common error message
                 .AddDataAnnotationsLocalization(options =>
                     {
                         options.DataAnnotationLocalizerProvider = (type, factory) =>
@@ -33,12 +35,20 @@ namespace ImplementingLocalization
                                 return factory.Create(typeof(ErrorMessages));
                             };
                     });
-
+            // resources path
             services.Configure<LocalizationOptions>(options =>
             {
                 options.ResourcesPath = "Resources";
             });
 
+            // custom validation provider
+            services.Configure<MvcOptions>(options =>
+            {
+                options.ModelMetadataDetailsProviders.Add(
+                    new CustomValidationMetadataProvider());
+            });
+
+            // supported cultures
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 options.SupportedUICultures = new List<CultureInfo>

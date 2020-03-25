@@ -4,13 +4,13 @@ namespace ImplementingLocalization.Models.Home
 {
     public class ContactModel
     {
-        [Required(ErrorMessage = "RequiredError")]
-        [MaxLength(50,ErrorMessage = "MaxLengthError")]
+        [Required]
+        [MaxLength(50)]
         [Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "RequiredError")]
-        [MaxLength(500, ErrorMessage = "MaxLengthError")]
+        [Required]
+        [MaxLength(500)]
         [Display(Name = "Comment")]
         public string Comment { get; set; }
     }
