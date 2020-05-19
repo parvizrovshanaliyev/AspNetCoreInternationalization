@@ -58,7 +58,8 @@ namespace ImplementingLocalization
                     new CultureInfo("es-MX")
                 };
                 // default culture
-                options.DefaultRequestCulture = new RequestCulture("en-US");
+                options.DefaultRequestCulture = new RequestCulture("ru-RU", "ru-RU");
+                
             });
         }
 
@@ -76,6 +77,7 @@ namespace ImplementingLocalization
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            //
             app.UseStaticFiles();
             //
             app.UseRequestLocalization();

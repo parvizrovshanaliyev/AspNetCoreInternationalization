@@ -12,7 +12,7 @@ namespace StringLocalizersDemo.Localization
     public class JsonStringLocalizerFactory : IStringLocalizerFactory
     {
         #region fields
-        private  string _resourcesRelativePath;
+        private readonly string _resourcesRelativePath;
         #endregion
 
         #region ctor

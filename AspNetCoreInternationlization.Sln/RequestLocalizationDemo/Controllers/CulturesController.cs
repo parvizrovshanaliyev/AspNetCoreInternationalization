@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Localization;
+﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RequestLocalizationDemo.Controllers
@@ -14,11 +10,11 @@ namespace RequestLocalizationDemo.Controllers
             RequestCulture requestCulture =
                 new RequestCulture(uiCulture);
 
-            string coockieValue =
+            string cookieValue =
                 CookieRequestCultureProvider.MakeCookieValue(requestCulture);
 
             Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
-                coockieValue);
+                cookieValue);
             return Ok();
         }
     }

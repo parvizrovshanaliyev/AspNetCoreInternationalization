@@ -102,9 +102,5 @@ namespace StringLocalizersDemo.Localization
                 culture);
         }
 
-       
-
-        
-
     }
 }
