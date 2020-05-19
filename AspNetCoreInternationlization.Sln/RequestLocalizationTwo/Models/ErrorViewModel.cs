@@ -1,5 +1,3 @@
-using System;
-
 namespace RequestLocalizationTwo.Models
 {
     public class ErrorViewModel
