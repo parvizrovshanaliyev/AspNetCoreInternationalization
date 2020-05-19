@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using RequestLocalizationTwo.Enumerations;
 using RequestLocalizationTwo.Models;
+using RequestLocalizationTwo.PipeLines;
 
 namespace RequestLocalizationTwo.Controllers
 {
-    //[MiddlewareFilter(typeof(LocalizationPipeline))]
+    [MiddlewareFilter(typeof(LocalizationPipeline))]
     public class EnumerationsController : Controller
     {
         private readonly IStringLocalizer<Gender> _genderLocalizer;
@@ -22,9 +23,9 @@ namespace RequestLocalizationTwo.Controllers
 
         public IActionResult Genders()
         {
-            Console.WriteLine("+++++++++++=====+++++++++++");
-            Console.WriteLine($"Current Culture : {CultureInfo.CurrentCulture}");
-            Console.WriteLine($"Current UI Culture : {CultureInfo.CurrentUICulture}");
+            //Console.WriteLine("+++++++++++=====+++++++++++");
+            //Console.WriteLine($"Current Culture : {CultureInfo.CurrentCulture}");
+            //Console.WriteLine($"Current UI Culture : {CultureInfo.CurrentUICulture}");
 
             Array values = Enum.GetValues(typeof(Gender));
 
@@ -37,13 +38,13 @@ namespace RequestLocalizationTwo.Controllers
                     Value = (int) value
                 }).ToList();
 
-            //IRequestCultureFeature feature =
-            //    HttpContext.Features.Get<IRequestCultureFeature>();
-            //Console.WriteLine("+++++++++++=====+++++++++++");
-            //Console.WriteLine($"Current Culture : {feature.RequestCulture.Culture}");
-            //Console.WriteLine($"Current UI Culture : {feature.RequestCulture.UICulture}");
-            //Console.WriteLine($"Provider : {feature.Provider}");
-            
+            IRequestCultureFeature feature =
+                HttpContext.Features.Get<IRequestCultureFeature>();
+            Console.WriteLine("+++++++++++=====+++++++++++");
+            Console.WriteLine($"Current Culture : {feature.RequestCulture.Culture}");
+            Console.WriteLine($"Current UI Culture : {feature.RequestCulture.UICulture}");
+            Console.WriteLine($"Provider : {feature.Provider}");
+
             return Ok(selectList);
         }
     }

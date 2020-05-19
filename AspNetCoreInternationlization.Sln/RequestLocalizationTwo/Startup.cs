@@ -3,6 +3,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Localization.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -41,11 +42,11 @@ namespace RequestLocalizationTwo
                     new CultureInfo("en-GB"),
                     new CultureInfo("en-US")
                 };
-                //options.FallBackToParentUICultures = false;
+                options.FallBackToParentUICultures = false;
                 // default culture
                 options.DefaultRequestCulture = new RequestCulture("en-GB");
-                //options.RequestCultureProviders.Insert(0,
-                //    new RouteDataRequestCultureProvider());
+                options.RequestCultureProviders.Insert(0,
+                    new RouteDataRequestCultureProvider());
             });
 
 
@@ -75,6 +76,9 @@ namespace RequestLocalizationTwo
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "defaultWithCulture",
+                    pattern: "{ui-culture}/{controller=Enumerations}/{action=Genders}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Enumerations}/{action=Genders}/{id?}");

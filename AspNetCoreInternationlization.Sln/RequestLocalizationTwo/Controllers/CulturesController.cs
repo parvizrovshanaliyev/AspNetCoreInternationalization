@@ -18,5 +18,5 @@ namespace RequestLocalizationTwo.Controllers
 
             return Ok();
         }
-    }
+     }
 }
