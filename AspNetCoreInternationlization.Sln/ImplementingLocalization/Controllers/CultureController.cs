@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,11 @@ namespace ImplementingLocalization.Controllers
                 CookieRequestCultureProvider.DefaultCookieName;
             //
             Response.Cookies.Append(cookieName, cookieValue);
+
+            Console.WriteLine(@"+++++++++++=====+++++++++++");
+            Console.WriteLine($@"Current Culture : {feature.RequestCulture.Culture}");
+            Console.WriteLine($@"Current UI Culture : {feature.RequestCulture.UICulture}");
+            Console.WriteLine($@"Provider : {feature.Provider}");
 
             return LocalRedirect(returnUrl);
         }

@@ -40,6 +40,7 @@ namespace RequestLocalizationTwo.Controllers
 
             IRequestCultureFeature feature =
                 HttpContext.Features.Get<IRequestCultureFeature>();
+
             Console.WriteLine("+++++++++++=====+++++++++++");
             Console.WriteLine($"Current Culture : {feature.RequestCulture.Culture}");
             Console.WriteLine($"Current UI Culture : {feature.RequestCulture.UICulture}");

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Localization.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RequestLocalizationDemo.Localization;
 
 namespace RequestLocalizationTwo
 {
@@ -45,8 +46,12 @@ namespace RequestLocalizationTwo
                 options.FallBackToParentUICultures = false;
                 // default culture
                 options.DefaultRequestCulture = new RequestCulture("en-GB");
+
                 options.RequestCultureProviders.Insert(0,
                     new RouteDataRequestCultureProvider());
+
+                options.RequestCultureProviders.Insert(1,
+                    new CountryDomainRequestCultureProvider());
             });
 
 

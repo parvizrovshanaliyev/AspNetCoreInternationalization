@@ -25,16 +25,7 @@ namespace ImplementingLocalization
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews()
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                // common error message
-                .AddDataAnnotationsLocalization(options =>
-                    {
-                        options.DataAnnotationLocalizerProvider = (type, factory) =>
-                            {
-                                return factory.Create(typeof(ErrorMessages));
-                            };
-                    });
+           
             // resources path
             services.Configure<LocalizationOptions>(options =>
             {
@@ -61,6 +52,15 @@ namespace ImplementingLocalization
                 options.DefaultRequestCulture = new RequestCulture("ru-RU", "ru-RU");
                 
             });
+
+            services.AddControllersWithViews()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                // common error message
+                .AddDataAnnotationsLocalization(options =>
+                {
+                    options.DataAnnotationLocalizerProvider = (type, factory) => 
+                        factory.Create(typeof(ErrorMessages));
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
